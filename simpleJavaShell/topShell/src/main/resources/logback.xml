@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <!-- properties config -->
+    <property resource="./properties/app.properties"/>
+    <property name="logRoot" value="${slf4j.root}" />
+    <property name="appName" value="spring_boot_simple"/>
+    <!-- info log config -->
+    <appender name="INFO_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- filter info log level config -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+        </filter>
+        <file>${logRoot}/${appName}.log</file>
+        <encoder>
+            <pattern>%date %-5level [%thread] [%file:%line] %msg%n</pattern>
+            <charset>${slf4j.charset}</charset>
+        </encoder>
+        <!-- info log backup config -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logRoot}/${appName}-%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="CONSOLE_LOG" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- console log print format config -->
+        <encoder>
+            <pattern>%date %-5level [%thread] [%file:%line] %msg%n</pattern>
+            <charset>${slf4j.charset}</charset>
+        </encoder>
+        <!-- Only log level INFO and above -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${slf4j.level}</level>
+        </filter>
+    </appender>
+    <logger name="com.kang" level="INFO" additivity="false">
+        <appender-ref ref="INFO_LOG"/>
+        <appender-ref ref="CONSOLE_LOG"/>
+    </logger>
+    <root level="${slf4j.level}">
+        <appender-ref ref="CONSOLE_LOG"/>
+    </root>
+</configuration>
