@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- 文件生成配置 -->
+    <script>
+        <generate template="application.properties.vm" destfile="WEB-INF/classes/properties/application.properties" charset="UTF-8"/>
+    </script>
+</config>

@@ -1,14 +1,20 @@
-package com.kang.shell.top;
+package com.kang.shell.quartz;
 
 import com.google.common.base.Throwables;
 import com.kang.shell.common.AppendUtils;
+import com.kang.shell.constants.TaskConstants;
+import com.kang.shell.top.TopShell;
+import com.kang.shell.top.TopVO;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,17 +24,20 @@ import java.util.List;
  * @Author Healthy
  * @Version
  */
+@Component
 @Slf4j
-public class TopShellTest extends BaseTest {
-
+public class QuartzRun {
+    @Autowired
+    private TaskConstants taskConstants;
     @Autowired
     private TopShell topShell;
 
-    @Test
-    public void splitToFile(){
-        String fileUrl  = "D:\\jixin\\cpu.txt";
+    public void runReport(){
         List<TopVO> topVOList = new ArrayList<TopVO>();
-        topShell.splitToFile(topVOList,fileUrl);
+        Date date = new Date();
+        String todayStr = DateFormatUtils.ISO_DATE_FORMAT.format(date);
+        String dateTime =  FastDateFormat.getInstance("yyyy-MM-dd_HH_mm_ss").format(date);
+        topShell.splitToFile(topVOList,taskConstants.getFilePath()+todayStr+".log");
         topShell.sortCPU(topVOList);
         AppendUtils appendUtils = AppendUtils.getInstance();
         topShell.reportCPU(topVOList,appendUtils);
@@ -37,20 +46,10 @@ public class TopShellTest extends BaseTest {
         log.info(appendUtils.toString());
         try {
             org.apache.commons.io.FileUtils.writeStringToFile
-                    (new File("D:\\jixin\\cpu_report.txt"),
-                    appendUtils.toString(), "utf-8");
+                    (new File(taskConstants.getFilePath()+dateTime+"_report.txt"),
+                            appendUtils.toString(), "utf-8");
         } catch (IOException e) {
             log.info(Throwables.getStackTraceAsString(e));
         }
     }
-
-    @Test
-    public void testSplit(){
-        String str = "12490 root 20 0 8771m 1.1g 11m S 0.0 6.7 119:39.87 java 2017-09-05_00:18:36";
-        String[] arry = str.split("\\s+");
-        for(int i =0;i<arry.length;i++){
-            System.out.println(i +":"+ arry[i]);
-        }
-    }
-
 }

@@ -147,6 +147,22 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
         </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -170,7 +186,7 @@
                 <version>${maven-compiler.version}</version>
             </plugin>
             <!--autoconfig配置定义 -->
-            <!--<plugin>
+            <plugin>
                 <groupId>com.alibaba.citrus.tool</groupId>
                 <artifactId>autoconfig-maven-plugin</artifactId>
                 <version>${autoconfig-plugin-version}</version>
@@ -186,7 +202,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
            <!-- <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>

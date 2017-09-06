@@ -35,6 +35,9 @@
         <druid.version>1.0.27</druid.version>
         <aspectjweaver.version>1.8.10</aspectjweaver.version>
         <junit.version>4.12</junit.version>
+        <commons-io.version>2.0.1</commons-io.version>
+        <quartz.version>2.2.0</quartz.version>
+        <spring.version>4.3.6.RELEASE</spring.version>
     </properties>
 
     <dependencyManagement>
@@ -228,6 +231,26 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

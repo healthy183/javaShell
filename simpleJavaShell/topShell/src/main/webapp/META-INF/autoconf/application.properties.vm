@@ -1,0 +1,5 @@
+runReport=${runReport}
+filePath=${filePath}
+slf4j.root=${slf4j_root}
+slf4j.level=${slf4j_level}
+slf4j.charset=${slf4j_charset}

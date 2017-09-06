@@ -2,7 +2,7 @@
 
 <configuration>
     <!-- properties config -->
-    <property resource="./properties/app.properties"/>
+    <property resource="./properties/application.properties"/>
     <property name="logRoot" value="${slf4j.root}" />
     <property name="appName" value="spring_boot_simple"/>
     <!-- info log config -->
